@@ -118,7 +118,10 @@ class MyMainWindow(QtGui.QMainWindow):
         self.timer.start(self.speed - max(0, delta))
 
 if __name__ == "__main__":
-    rc_filename = os.path.join(os.environ['HOME'], '.metrognome.rc')
+    if sys.platform == 'win32':
+        rc_filename = os.path.join(os.environ['USERPROFILE'], '.metrognome.rc')
+    else:
+        rc_filename = os.path.join(os.environ['HOME'], '.metrognome.rc')
     try:
         f = int(file(rc_filename).read())
     except:
