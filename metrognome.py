@@ -100,6 +100,7 @@ class MyMainWindow(QtGui.QMainWindow):
             delta = ((time.time() - self.last_played) * 1000.0) - self.speed
         else:
             delta = 0
+        self.last_played = time.time()
 
         self.audio_output.stop()
         self.audio_output.reset()
@@ -113,9 +114,8 @@ class MyMainWindow(QtGui.QMainWindow):
         self.blink_timer.stop()
         self.ui.ping_icon.setPixmap(self.tick_pixmaps[True])
         self.blink_timer.start(100)
-        
-        self.last_played = time.time()
-        self.timer.start(self.speed - delta)
+                
+        self.timer.start(self.speed - max(0, delta))
 
 if __name__ == "__main__":
     rc_filename = os.path.join(os.environ['HOME'], '.metrognome.rc')
