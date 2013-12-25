@@ -5,8 +5,8 @@ import time
 import os
  
 from PySide import QtGui
-from PyQt4.QtMultimedia import QAudioOutput, QAudioFormat
-from PyQt4.QtCore import QFile, QIODevice, QTimer, QObject, QEvent
+from PySide.QtMultimedia import QAudioOutput, QAudioFormat
+from PySide.QtCore import QFile, QIODevice, QTimer, QObject, QEvent
 
 from main_ui import Ui_MainWindow
 
@@ -97,7 +97,7 @@ class MyMainWindow(QtGui.QMainWindow):
 
     def play_tick(self):
         if self.last_played:
-            delta = self.speed - ((time.time() - self.last_played) * 1000.0)
+            delta = ((time.time() - self.last_played) * 1000.0) - self.speed
         else:
             delta = 0
 
